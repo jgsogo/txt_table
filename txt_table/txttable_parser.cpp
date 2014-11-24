@@ -11,7 +11,7 @@ namespace core {
     namespace service {
 
         txttable_parser::txttable_parser() {
-            _fn_on_row = 0;
+            _fn_on_row = nullptr;
             }
 
         txttable_parser::~txttable_parser() {
@@ -19,7 +19,7 @@ namespace core {
             }
 
         void txttable_parser::reset() {
-            _fn_on_row = 0;
+            _fn_on_row = nullptr;
             _rows.clear();
 
             _t_fields::iterator it_field;
