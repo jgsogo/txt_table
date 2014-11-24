@@ -1,0 +1,6 @@
+[submodule "depends/cmake"]
+	path = depends/cmake
+	url = git://github.com/jgsogo/cmake.git
+[submodule "depends/logger"]
+	path = depends/logger
+	url = git://github.com/jgsogo/logger.git
