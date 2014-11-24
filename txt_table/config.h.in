@@ -1,0 +1,9 @@
+
+#define TXT_TABLE_MAJOR_VERSION (@TXT_TABLE_MAJOR_VERSION@)
+#define TXT_TABLE_MINOR_VERSION (@TXT_TABLE_MINOR_VERSION@)
+#define TXT_TABLE_PATCH_VERSION (@TXT_TABLE_PATCH_VERSION@)
+#define TXT_TABLE_VERSION_STRING "@TXT_TABLE_VERSION@"
+
+const std::string app_name = "txt_table";
+const std::string app_namespace = "core::service";
+const std::string doc = "Txt as table parser";

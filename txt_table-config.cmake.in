@@ -1,0 +1,16 @@
+# - Config file for the TxtTable package
+# It defines the following variables
+#  TXT_TABLE_INCLUDE_DIRS - include directories for TxtTable
+#  TXT_TABLE_LIBRARIES    - libraries to link against
+#  TXT_TABLE_EXECUTABLE   - the bar executable
+
+# Compute paths
+get_filename_component(TXT_TABLE_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+set(TXT_TABLE_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+
+# Our library dependencies (contains definitions for IMPORTED targets)
+include("${TXT_TABLE_CMAKE_DIR}/txt_table-targets.cmake")
+
+# These are IMPORTED targets created by txt_table-targets.cmake
+set(TXT_TABLE_LIBRARIES txt_table)
+#set(FOOBAR_EXECUTABLE bar)
