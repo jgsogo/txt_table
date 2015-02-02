@@ -1,3 +1,8 @@
+if(BIICODE)
+	INIT_BIICODE_BLOCK()
+	ADD_BIICODE_TARGETS()	
+endif()
+
 cmake_minimum_required(VERSION 2.8)
 project(txt_table CXX)
 

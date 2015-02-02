@@ -2,8 +2,8 @@ include (GenerateExportHeader)
 include(../depends/cmake/use_precompiled_header2.cmake)
 
 if(NOT WIN32) # On Visual Studio, C++0x features are enabled by default
-	# Enable C++0x
-	SET(CMAKE_CXX_FLAGS "-std=c++0x")
+	# Enable C++11
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()
 
 #------------------------------------------
@@ -18,10 +18,10 @@ set(SRC_FILES
 	)
 
 # Look for boost
-include(../depends/cmake/boost_install.txt)
-BoostInstall()
+#include(../depends/cmake/boost_install.txt)
+#BoostInstall()
 
-include_directories( ${Boost_INCLUDE_DIRS} )
+#include_directories( ${Boost_INCLUDE_DIRS} )
 
 #------------------------------------------
 #   Add export macro and
