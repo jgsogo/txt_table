@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 2.8)
 
 # Add sub-directories
 add_subdirectory(txt_table_basic)
+
+SET(EXAMPLES_TXT_TABLE_BASIC_SRC_FILES ${EXAMPLES_TXT_TABLE_BASIC_SRC_FILES} PARENT_SCOPE)

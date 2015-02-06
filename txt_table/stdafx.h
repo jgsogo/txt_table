@@ -5,16 +5,6 @@
 
 #pragma once
 
-#ifdef _WIN32
-
-    #include "targetver.h"
-
-    #define WIN32_LEAN_AND_MEAN             // Excluir material rara vez utilizado de encabezados de Windows
-    // Archivos de encabezado de Windows:
-    #include <windows.h>
-
-#endif
-
 #include <fstream>
 #include <iterator>
 #include <algorithm>

@@ -5,14 +5,6 @@
 
 #pragma once
 
-#ifdef _WIN32
-
-#include <SDKDDKVer.h>
-#define WIN32_LEAN_AND_MEAN  // Excluir material rara vez utilizado de encabezados de Windows
-#include <windows.h>
-
-#endif
-
 // Archivos de encabezado en tiempo de ejecución de C
 #include <stdlib.h>
 #include <stdio.h>
