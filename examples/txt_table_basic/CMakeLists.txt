@@ -17,6 +17,12 @@ if(WIN32)
 endif(WIN32)
 
 if (NOT BIICODE)
+    # Look for boost
+    include(../../depends/cmake/boost_install.txt)
+    BoostInstall()
+
+    include_directories( ${Boost_INCLUDE_DIRS} )
+    
     add_executable(txt_table_basic ${EXAMPLES_TXT_TABLE_BASIC_SRC_FILES})
     target_link_libraries(txt_table_basic txt_table)
      

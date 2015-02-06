@@ -10,7 +10,7 @@ set(TXT_TABLE_SRC_FILES
     ${PROJECT_SOURCE_DIR}/txt_table/CMakeLists.txt 
 	)
 set(TXT_TABLE_SRC_FILES ${TXT_TABLE_SRC_FILES} PARENT_SCOPE)
-configure_file(${PROJECT_SOURCE_DIR}/txt_table/config.h.in "${PROJECT_BINARY_DIR}/config.h" @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/txt_table/config.h.in "${PROJECT_BINARY_DIR}/txt_table/config.h" @ONLY)
 
 #------------------------------------------
 #   Add export macro and
@@ -35,7 +35,7 @@ if (NOT BIICODE)
 
     include_directories( ${Boost_INCLUDE_DIRS} )
 
-
+    
     #------------------------------------------
     #        Build a library
     add_definitions(-D_UNICODE -DUNICODE)
