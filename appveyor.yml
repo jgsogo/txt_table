@@ -24,7 +24,7 @@ before_build:
   - cmd: for %%i in (../*) do if %%i NEQ "%project_name%" move "..\%%i" blocks\%block_user%\%block_name%\
   # move the directories -> there are none in this repo:
   - cmd: for /d %%i in (../*) do if %%i NEQ "%project_name%" move "..\%%i" blocks\%block_user%\%block_name%\
-  - cmd: bii cpp:configure -G "Visual Studio 10"
+  - cmd: bii cpp:configure -G "Visual Studio 10" -DBOOST_ROOT=C:/Libraries/boost
 
 build_script:
   - cmd: bii cpp:build
