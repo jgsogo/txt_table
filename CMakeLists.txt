@@ -42,6 +42,7 @@ if(BIICODE)
 
     generate_export_header(${BII_LIB_TARGET} BASE_NAME txt_table) # Necesito ponerlo después de "ADD_BIICODE_TARGETS"
     target_include_directories( ${BII_LIB_TARGET} PUBLIC "${PROJECT_BINARY_DIR}/../") # Necesito ponerlo después de "ADD_BIICODE_TARGETS"
+    target_include_directories( ${BII_LIB_TARGET} PUBLIC "${PROJECT_BINARY_DIR}") # Necesito ponerlo después de "ADD_BIICODE_TARGETS"
 
 else()
     cmake_minimum_required(VERSION 2.8)
