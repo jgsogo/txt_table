@@ -47,12 +47,6 @@ if(BIICODE)
 else()
     cmake_minimum_required(VERSION 2.8)
 
-    # Set default for CMAKE_INSTALL_PREFIX
-    SET(CORE_INSTALL_PREFIX "C:/libraries/core" CACHE PATH "Prefix prepended to
-    install directories")
-    SET(CMAKE_INSTALL_PREFIX "${CORE_INSTALL_PREFIX}" CACHE INTERNAL "Prefix
-    prepended to install directories" FORCE)
-
     # Offer the user the choice of overriding the installation directories
     set(INSTALL_LIB_DIR lib CACHE PATH "Installation directory for libraries")
     set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
