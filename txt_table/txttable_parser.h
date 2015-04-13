@@ -6,7 +6,7 @@
 #include <map>
 #include <functional>
 
-#include "txt_table/txt_table_export.h"
+#include "txt_table_export.h"
 #include "field.h"
 
 namespace core {

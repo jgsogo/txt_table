@@ -70,8 +70,8 @@ else()
 
     # set up include-directories
     include_directories(
-    "${PROJECT_SOURCE_DIR}"   # to find txt_table/txttable_parser.h
-    "${PROJECT_BINARY_DIR}")  # to find txt_table/config.h
+        "${PROJECT_BINARY_DIR}/${CMAKE_PROJECT_NAME}"   # to find txt_table_export.h
+        ${PROJECT_BINARY_DIR})                          # to find txt_table/config.h
 
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 

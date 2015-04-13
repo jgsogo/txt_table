@@ -1,6 +1,6 @@
 // dllmain.cpp : Define el punto de entrada de la aplicación DLL.
 #include "stdafx.h"
-#include "txt_table/txt_table_export.h"
+#include "txt_table_export.h"
 #include "txt_table/config.h"
 
 #ifdef _WIN32

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
-#include "txt_table/txt_table_export.h"
+#include "txt_table_export.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/trim.hpp>
 
