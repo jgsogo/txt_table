@@ -34,6 +34,8 @@ namespace core {
                     typedef field_concrete<T> concrete_field_type;
                     return (dynamic_cast<const concrete_field_type*>(this))->get();
                     };
+
+                const _t_rows& get_rows() const { return _rows;};
             protected:
                 _t_rows _rows;
                 std::string _name;
@@ -65,7 +67,6 @@ namespace core {
             protected:
                 T _value;
             };
-
 
         // Non accesible field
         struct ignored {};

@@ -42,11 +42,7 @@ namespace core {
                 
                 const _t_field_descriptors& get_fields() const { return _field_descriptors;};
                 int delete_field(const std::string& keyname);
-                /*
-                void add_field(field* p) {
-                    _fields.push_back(p);
-                    };
-                */
+                
                 void set_on_row_callback(_t_on_row fn_on_row, _t_on_header_row fn_on_header_row = 0);
 
                 int parse_headers(const std::string& headers, const std::string& sep);
@@ -56,6 +52,10 @@ namespace core {
                 const _t_rows& get_rows() const;
                 const _t_row& get_row(unsigned int row_id) const;
                 int get_row(unsigned int row_id, const _t_row* row) const;
+
+                // Dumping
+                void dump(std::ostream& os, const std::string& sep, const bool& headers) const;
+                void dump_headers(std::ostream& os, const std::string& sep) const;
 
             protected:
                 static int split(const std::string& line, const std::string& sep, std::vector<std::string> &vstrings);

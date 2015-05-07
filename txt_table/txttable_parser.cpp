@@ -177,5 +177,34 @@ namespace core {
             return 0;
             }
 
+        void txttable_parser::dump_headers(std::ostream& os, const std::string& sep) const {
+            _t_field_descriptors::const_iterator it_last = --_field_descriptors.end();
+            for (auto it = _field_descriptors.begin(); it!=_field_descriptors.end(); ++it) {
+                os << (it->second.first.length() ? it->second.first : it->first);
+                if (it != it_last) {
+                    os << sep;
+                    }
+                }
+            }
+
+        void txttable_parser::dump(std::ostream& os, const std::string& sep, const bool& headers) const {
+            if (headers) {
+                dump_headers(os, sep);
+                os << "\n";
+                }
+            for (auto it = _rows.begin(); it!=_rows.end(); ++it) {
+                for (auto it_field = it->begin(); it_field!=it->end(); ++it_field) {
+                    auto it_last = --it->end();
+                    os << it_field->second->get_str_value();
+                    if (it_field != it_last) {
+                        os << sep;
+                        }
+                    }
+                os << "\n";
+                }
+            os << "\n";
+            }
+
+
         }
     }

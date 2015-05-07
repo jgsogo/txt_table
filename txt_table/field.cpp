@@ -22,7 +22,5 @@ namespace core {
         // Field ignored
         field_concrete<ignored> field_concrete<ignored>::dummy("");
 
-
-
         }
     }
