@@ -21,16 +21,16 @@ namespace core {
         void txttable_parser::reset() {
             _fn_on_row = nullptr;
             _rows.clear();
-            _field_descriptors.clear();
+            _columns.clear();
             // TODO: actually delete fields.
             }
 
-        int txttable_parser::delete_field(const std::string& keyname) {
-            _t_field_descriptors::iterator it = std::find_if(_field_descriptors.begin(), _field_descriptors.end(), [&keyname](const std::pair<std::string, field*>& item){
+        int txttable_parser::delete_column(const std::string& keyname) {
+            _t_columns::iterator it = std::find_if(_columns.begin(), _columns.end(), [&keyname](const std::pair<std::string, field*>& item){
                 return (keyname.compare(item.second->get_name())==0);
                 });
-            if (it != _field_descriptors.end()) {
-                _field_descriptors.erase(it);
+            if (it != _columns.end()) {
+                _columns.erase(it);
                 }
             return 0;
             }
@@ -94,7 +94,7 @@ namespace core {
             txttable_parser::split(headers, sep, v_headers);
             std::for_each(v_headers.begin(), v_headers.end(), boost::bind(&boost::trim<std::string>, _1, std::locale()));
 
-            if (v_headers.size() != _field_descriptors.size()) {
+            if (v_headers.size() != _columns.size()) {
                 LOG_ERROR("Headers size if different from fields size. Abort!");
                 return -1;
                 }
@@ -122,14 +122,14 @@ namespace core {
                 std::vector<std::string> words;
                 txttable_parser::split(line, sep, words);
 
-                if (words.size() == _field_descriptors.size()) {
+                if (words.size() == _columns.size()) {
                     try {
                         it_row = _rows.insert(_rows.end(), _t_row());
-                        std::for_each( boost::make_zip_iterator(boost::make_tuple(words.begin(), _field_descriptors.begin())),
-                                        boost::make_zip_iterator(boost::make_tuple(words.end(), _field_descriptors.end())),
+                        std::for_each( boost::make_zip_iterator(boost::make_tuple(words.begin(), _columns.begin())),
+                                        boost::make_zip_iterator(boost::make_tuple(words.end(), _columns.end())),
                                         [&it_row](const boost::tuple<const std::string&, const std::pair<std::string, field*>&>& item ) {
                                             try {
-                                                (*it_row).push_back( item.get<1>().second->build_from_value(item.get<0>()));
+                                                (*it_row).fields.push_back( item.get<1>().second->build_from_value(item.get<0>()));
                                                 }
                                             catch(boost::bad_lexical_cast& e) {
                                                 std::string msg = e.what();

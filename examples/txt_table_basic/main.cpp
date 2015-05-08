@@ -15,6 +15,9 @@ int main() {
 
     auto rows = parser.get_rows();
     std::cout << "Read " << rows.size() << " rows." << std::endl;
+    for (auto i = 0; i<10; ++i) {
+        std::cout << rows[i] << std::endl;
+        }
 
     return 0;
     }

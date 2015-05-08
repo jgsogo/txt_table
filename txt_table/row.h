@@ -9,7 +9,6 @@ namespace core {
 		struct row {
 			std::vector<field*> fields;
 			std::vector<field*>::iterator it;
-
 			
 			row& reset(const std::size_t& offset=0) { it = fields.begin()+offset; return *this;};
 
@@ -34,7 +33,7 @@ namespace core {
 				};
 			};
 
-		std::ostream& operator<<(std::ostream& os, const row& r) {
+		inline std::ostream& operator<<(std::ostream& os, const row& r) {
 			r.print(os, ", ");
 			return os;
 			}
