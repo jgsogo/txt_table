@@ -31,6 +31,30 @@ namespace core {
 						}
 					}
 				};
+
+			// Get with position
+			template <typename T>
+			const T& get(const std::size_t& column) {
+				return fields[column]->get<T>();
+				};
+
+			const std::string operator[](const std::size_t& column) {
+				return fields[column]->get_str_value();
+				};
+
+			// Get by column name
+			template <typename T>
+			const T& get(const std::string& column) {
+				auto it = std::find_if(fields.begin(), fields.end(), [&column](const field* f){ return f->get_name().compare(column)==0;});
+				return (*it)->get<T>();
+				};
+
+			const std::string operator[](const std::string& column) {
+				auto it = std::find_if(fields.begin(), fields.end(), [&column](const field* f){ return f->get_name().compare(column)==0;});
+				return (*it)->get_str_value();
+				};
+
+
 			};
 
 		inline std::ostream& operator<<(std::ostream& os, const row& r) {

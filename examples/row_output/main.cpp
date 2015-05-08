@@ -25,6 +25,13 @@ int main() {
     r.reset(1) << std::string("Bye bye!");
     std::cout << "\t Test2: '" << r << "'" << std::endl;
 
+    // Accessing
+    std::cout << "field#1: " << r.get<float>(0) << std::endl;
+    std::cout << "field#2: " << r[1] << std::endl;
+
+    // Accessing
+    std::cout << "field#1: " << r.get<float>("field#1") << std::endl;
+    std::cout << "field#2: " << r["field#2"] << std::endl;
 
     return 0;
     }
