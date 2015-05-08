@@ -34,6 +34,12 @@ namespace core {
                     typedef field_concrete<T> concrete_field_type;
                     return (dynamic_cast<const concrete_field_type*>(this))->get();
                     };
+
+                template <typename T>
+                void set(const T& t) {
+                    typedef field_concrete<T> concrete_field_type;
+                    dynamic_cast<concrete_field_type*>(this)->set(t);
+                    };
             protected:
                 _t_rows _rows;
                 std::string _name;
@@ -55,6 +61,9 @@ namespace core {
                     return new field_concrete<T>(_name, boost::trim_copy(value));
                     };
                 virtual const T& get() const { return _value;};
+                virtual void set(const T& data) {
+                    _value = data;
+                    };
                 virtual const std::string get_str_value() const {
                     /* \todo TODO: Lexical cast it's actually a very slow function due to use of streamstrings.
                         Override default behaviour for specific types to gain speed.
@@ -86,6 +95,8 @@ namespace core {
                     throw std::runtime_error("Field ignored.");
                     return _ignored;
                     };
+                template <typename T>
+                void set(T& data) {};
                 virtual const std::string get_str_value() const { return "[ignored]";};
             protected:
                 static field_concrete<ignored> dummy;
