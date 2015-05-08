@@ -5,6 +5,16 @@
 
 int main() {
     core::service::txttable_parser parser;
+    parser.add_field<float>("sepal length");
+    parser.add_field<float>("sepal width");
+    parser.add_field<float>("petal length");
+    parser.add_field<float>("petal width");
+    parser.add_field<std::string>("class");
+
+    parser.parse_file("data/iris/iris.data", ",", false);
+
+    auto rows = parser.get_rows();
+    std::cout << "Read " << rows.size() << " rows." << std::endl;
 
     return 0;
     }
