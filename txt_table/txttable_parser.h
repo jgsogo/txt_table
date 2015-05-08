@@ -15,8 +15,8 @@ namespace core {
         class TXT_TABLE_EXPORT txttable_parser {
             public:
                 typedef std::vector<field*> _t_fields;
-                typedef std::map<std::string, field*> _t_row;
-                typedef std::map<std::string, std::pair<std::string, field*> > _t_field_descriptors;
+                typedef std::vector<field*> _t_row;
+                typedef std::vector<std::pair<std::string, field*> > _t_field_descriptors;
                 typedef std::vector<_t_row> _t_rows;
                 
                 typedef std::function<int (_t_row&)> _t_on_row;
@@ -32,7 +32,7 @@ namespace core {
                     typedef field_class<T> concrete_field_type;
                     field* aux_field_pointer = new concrete_field_type(keyname);
                     _fields.push_back(aux_field_pointer);
-                    _field_descriptors.insert( std::make_pair(keyname, std::make_pair(column_header, aux_field_pointer)) );
+                    _field_descriptors.push_back( std::make_pair(column_header, aux_field_pointer) );
                     };
                 
                 template <class T>

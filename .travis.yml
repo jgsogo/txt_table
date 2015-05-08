@@ -1,0 +1,33 @@
+language: cpp
+compiler:
+- gcc
+before_install:
+- sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+- sudo apt-get update -qq
+install:
+- wget http://www.biicode.com/downloads/latest/ubuntu64
+- mv ubuntu64 bii-ubuntu64.deb
+- (sudo dpkg -i bii-ubuntu64.deb) && sudo apt-get -f install
+- rm bii-ubuntu64.deb
+- wget https://s3.amazonaws.com/biibinaries/thirdparty/cmake-3.0.2-Linux-64.tar.gz
+- tar -xzf cmake-3.0.2-Linux-64.tar.gz
+- sudo cp -fR cmake-3.0.2-Linux-64/* /usr
+- rm -rf cmake-3.0.2-Linux-64
+- rm cmake-3.0.2-Linux-64.tar.gz
+- sudo apt-get install -qq gcc-4.8 g++-4.8
+- sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
+script:
+- cmake --version
+- bii init biicode_project
+- mkdir -p ./biicode_project/blocks/jgsogo/txt_table
+- mv !(biicode_project) ./biicode_project/blocks/jgsogo/txt_table
+- cd biicode_project
+- bii find -um
+- bii cpp:build
+- cd bin
+after_success:
+- bii user jgsogo -p $BII_JGSOGO_PASSWORD
+- bii publish || dir
+env:
+  global:
+    secure: XoESFyIt+p7wtcLqordaEsJFLTvbZ4NxOlFDaKDVmK9q63Yoja1jCxMurpJNmJt9vZildVJvQI2ptouvLtSAFascp+Mpv49yFJaOgx+GZqniNRSV3s+JD/8SVXzjW40sKjDL8HIGZjFFU8RmSSzdiJ26E0uLd7H6L6gZad1t/GM=

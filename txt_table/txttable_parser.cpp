@@ -31,9 +31,11 @@ namespace core {
             }
 
         int txttable_parser::delete_field(const std::string& keyname) {
-            _t_field_descriptors::iterator it = _field_descriptors.find(keyname);
+            _t_field_descriptors::iterator it = std::find_if(_field_descriptors.begin(), _field_descriptors.end(), [&keyname](const std::pair<std::string, field*>& item){
+                return (keyname.compare(item.second->get_name())==0);
+                });
             if (it != _field_descriptors.end()) {
-                _t_fields::iterator it_fields = std::find(_fields.begin(), _fields.end(), it->second.second);
+                _t_fields::iterator it_fields = std::find(_fields.begin(), _fields.end(), it->second);
                 delete (*it_fields);
                 _fields.erase(it_fields);
                 _field_descriptors.erase(it);
@@ -135,7 +137,7 @@ namespace core {
                                         boost::make_zip_iterator(boost::make_tuple(words.end(), _fields.end())),
                                         [&it_row](const boost::tuple<const std::string&, const _t_fields::value_type&>& item ) {
                                             try {
-                                                (*it_row).insert( std::make_pair(item.get<1>()->get_name(), item.get<1>()->build_from_value(item.get<0>())));
+                                                (*it_row).push_back( item.get<1>()->build_from_value(item.get<0>()));
                                                 }
                                             catch(boost::bad_lexical_cast& e) {
                                                 std::string msg = e.what();
