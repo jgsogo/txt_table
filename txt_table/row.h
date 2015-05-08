@@ -2,7 +2,6 @@
 #pragma once
 
 #include "field.h"
-#include <typeinfo>
 
 namespace core {
 	namespace service {
