@@ -30,6 +30,6 @@ if (NOT BIICODE)
     set_target_properties(row_output PROPERTIES
       LINKER_LANGUAGE CXX
       FOLDER "examples")
-endif()
 
-set_property(TARGET row_output PROPERTY CXX_STANDARD 11)
+    set_property(TARGET row_output PROPERTY CXX_STANDARD 11)
+endif()

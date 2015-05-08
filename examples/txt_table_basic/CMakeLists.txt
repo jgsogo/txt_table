@@ -30,6 +30,7 @@ if (NOT BIICODE)
     set_target_properties(txt_table_basic PROPERTIES
       LINKER_LANGUAGE CXX
       FOLDER "examples")
+
+    set_property(TARGET txt_table_basic PROPERTY CXX_STANDARD 11)
 endif()
 
-set_property(TARGET txt_table_basic PROPERTY CXX_STANDARD 11)
