@@ -34,26 +34,26 @@ namespace core {
 
 			// Get with position
 			template <typename T>
-			const T& get(const std::size_t& column) {
+			const T& get(const std::size_t& column) const {
 				return fields[column]->get<T>();
 				};
 
-			const field* operator[](const std::size_t& column) {
+			const field* operator[](const std::size_t& column) const {
 				return fields[column];//->get_str_value();
 				};
 
 			// Get by column name
-            bool is_field(const std::string& column) {
+            bool is_field(const std::string& column) const {
                 return (fields.end() != std::find_if(fields.begin(), fields.end(), [&column](const field* f){ return f->get_name().compare(column)==0;}));
                 };
 
 			template <typename T>
-			const T& get(const std::string& column) {
+			const T& get(const std::string& column) const {
 				auto it = std::find_if(fields.begin(), fields.end(), [&column](const field* f){ return f->get_name().compare(column)==0;});
 				return (*it)->get<T>();
 				};
 
-			const field* operator[](const std::string& column) {
+			const field* operator[](const std::string& column) const {
 				auto it = std::find_if(fields.begin(), fields.end(), [&column](const field* f){ return f->get_name().compare(column)==0;});
 				return (*it);//->get_str_value();
 				};

@@ -170,11 +170,11 @@ namespace core {
             LOG_DEBUG("'" << _rows.size() << "' rows read.");
             return 0;
             }
-        /*
+        
         void txttable_parser::dump_headers(std::ostream& os, const std::string& sep) const {
-            _t_field_descriptors::const_iterator it_last = --_field_descriptors.end();
-            for (auto it = _field_descriptors.begin(); it!=_field_descriptors.end(); ++it) {
-                os << (it->second.first.length() ? it->second.first : it->first);
+            _t_columns::const_iterator it_last = --_columns.end();
+            for (auto it = _columns.begin(); it!=_columns.end(); ++it) {
+                os << (it->first.length() ? it->first : it->second->get_name());
                 if (it != it_last) {
                     os << sep;
                     }
@@ -187,18 +187,11 @@ namespace core {
                 os << "\n";
                 }
             for (auto it = _rows.begin(); it!=_rows.end(); ++it) {
-                for (auto it_field = it->begin(); it_field!=it->end(); ++it_field) {
-                    auto it_last = --it->end();
-                    os << it_field->second->get_str_value();
-                    if (it_field != it_last) {
-                        os << sep;
-                        }
-                    }
-                os << "\n";
+                os << *it << "\n";
                 }
             os << "\n";
             }
-        */
+        
 
         }
     }
