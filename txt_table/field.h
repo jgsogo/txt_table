@@ -107,5 +107,10 @@ namespace core {
 
         typedef field_concrete<ignored> field_ignored;
 
+		inline std::ostream& operator<<(std::ostream& os, const field* r) {
+			os << r->get_str_value();
+			return os;
+			}
+
         }
     }
