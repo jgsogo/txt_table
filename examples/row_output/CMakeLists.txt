@@ -1,13 +1,13 @@
 
 #------------------------------------------
 #   List source files
-file(GLOB _headers "${PROJECT_SOURCE_DIR}/examples/txt_table_basic/*.h")
-file(GLOB _src "${PROJECT_SOURCE_DIR}/examples/txt_table_basic/*.cpp")
-set(EXAMPLES_TXT_TABLE_BASIC_SRC_FILES
+file(GLOB _headers "${PROJECT_SOURCE_DIR}/examples/row_output/*.h")
+file(GLOB _src "${PROJECT_SOURCE_DIR}/examples/row_output/*.cpp")
+set(EXAMPLES_ROW_OUTPUT_SRC_FILES
 	${_headers}
 	${_src}	
 	)
-set(EXAMPLES_TXT_TABLE_BASIC_SRC_FILES ${EXAMPLES_TXT_TABLE_BASIC_SRC_FILES} PARENT_SCOPE)
+set(EXAMPLES_ROW_OUTPUT_SRC_FILES ${EXAMPLES_ROW_OUTPUT_SRC_FILES} PARENT_SCOPE)
 
 if(WIN32)
     # remove warning C4275: se ha utilizado una interfaz no de DLL class
@@ -24,23 +24,22 @@ if (NOT BIICODE)
 
     include_directories( ${Boost_INCLUDE_DIRS} )
     
-    add_executable(txt_table_basic ${EXAMPLES_TXT_TABLE_BASIC_SRC_FILES})
-    target_link_libraries(txt_table_basic txt_table)
-           
-    set_target_properties(txt_table_basic PROPERTIES
+    add_executable(row_output ${EXAMPLES_ROW_OUTPUT_SRC_FILES})
+    target_link_libraries(row_output txt_table)
+     
+    set_target_properties(row_output PROPERTIES
       LINKER_LANGUAGE CXX
       FOLDER "examples")
 
-    add_custom_command(TARGET txt_table_basic POST_BUILD    # Adds a post-build event to MyTest
+    add_custom_command(TARGET row_output POST_BUILD    # Adds a post-build event to MyTest
         COMMAND ${CMAKE_COMMAND} -E copy_if_different       # which executes "cmake - E copy_if_different..."
             $<TARGET_FILE:txt_table>                        # <--this is in-file
-            $<TARGET_FILE_DIR:txt_table_basic>)             # <--this is out-file path
+            $<TARGET_FILE_DIR:row_output>)             # <--this is out-file path
         
-    add_custom_command(TARGET txt_table_basic POST_BUILD    # Adds a post-build event to MyTest
+    add_custom_command(TARGET row_output POST_BUILD    # Adds a post-build event to MyTest
         COMMAND ${CMAKE_COMMAND} -E copy_directory          # which executes "cmake - E copy_if_different..."
             ${CMAKE_CURRENT_SOURCE_DIR}/../data             # <--this is in-file
-            $<TARGET_FILE_DIR:txt_table_basic>/../data)     # <--this is out-file path
-
-    set_property(TARGET txt_table_basic PROPERTY CXX_STANDARD 11)
+            $<TARGET_FILE_DIR:row_output>/../data)     # <--this is out-file path
+            
+    set_property(TARGET row_output PROPERTY CXX_STANDARD 11)
 endif()
-

@@ -21,22 +21,16 @@ namespace core {
         void txttable_parser::reset() {
             _fn_on_row = nullptr;
             _rows.clear();
-
-            _t_fields::iterator it_field;
-            for (it_field=_fields.begin(); it_field!=_fields.end(); ++it_field) {
-                delete (*it_field); // Row fields are deleted by its header.
-                }
-            _fields.clear();
-            _field_descriptors.clear();
+            _columns.clear();
+            // TODO: actually delete fields.
             }
 
-        int txttable_parser::delete_field(const std::string& keyname) {
-            _t_field_descriptors::iterator it = _field_descriptors.find(keyname);
-            if (it != _field_descriptors.end()) {
-                _t_fields::iterator it_fields = std::find(_fields.begin(), _fields.end(), it->second.second);
-                delete (*it_fields);
-                _fields.erase(it_fields);
-                _field_descriptors.erase(it);
+        int txttable_parser::delete_column(const std::string& keyname) {
+            _t_columns::iterator it = std::find_if(_columns.begin(), _columns.end(), [&keyname](const std::pair<std::string, field*>& item){
+                return (keyname.compare(item.second->get_name())==0);
+                });
+            if (it != _columns.end()) {
+                _columns.erase(it);
                 }
             return 0;
             }
@@ -100,7 +94,7 @@ namespace core {
             txttable_parser::split(headers, sep, v_headers);
             std::for_each(v_headers.begin(), v_headers.end(), boost::bind(&boost::trim<std::string>, _1, std::locale()));
 
-            if (v_headers.size() != _fields.size()) {
+            if (v_headers.size() != _columns.size()) {
                 LOG_ERROR("Headers size if different from fields size. Abort!");
                 return -1;
                 }
@@ -128,23 +122,23 @@ namespace core {
                 std::vector<std::string> words;
                 txttable_parser::split(line, sep, words);
 
-                if (words.size() == _fields.size()) {
+                if (words.size() == _columns.size()) {
                     try {
                         it_row = _rows.insert(_rows.end(), _t_row());
-                        std::for_each( boost::make_zip_iterator(boost::make_tuple(words.begin(), _fields.begin())),
-                                        boost::make_zip_iterator(boost::make_tuple(words.end(), _fields.end())),
-                                        [&it_row](const boost::tuple<const std::string&, const _t_fields::value_type&>& item ) {
+                        std::for_each( boost::make_zip_iterator(boost::make_tuple(words.begin(), _columns.begin())),
+                                        boost::make_zip_iterator(boost::make_tuple(words.end(), _columns.end())),
+                                        [&it_row](const boost::tuple<const std::string&, const std::pair<std::string, field*>&>& item ) {
                                             try {
-                                                (*it_row).insert( std::make_pair(item.get<1>()->get_name(), item.get<1>()->build_from_value(item.get<0>())));
+                                                (*it_row).fields.push_back( item.get<1>().second->build_from_value(item.get<0>()));
                                                 }
                                             catch(boost::bad_lexical_cast& e) {
                                                 std::string msg = e.what();
-                                                msg += ". Source value was '" + item.get<0>() + "' for field '" + item.get<1>()->get_name() + "'";
+                                                msg += ". Source value was '" + item.get<0>() + "' for field '" + item.get<1>().second->get_name() + "'";
                                                 throw txttable_parser_exception(msg);
                                                 }
                                             catch(std::bad_cast& e) {
                                                 std::string msg = e.what();
-                                                msg += ". Source value was '" + item.get<0>() + "' for field '" + item.get<1>()->get_name() + "'";
+                                                msg += ". Source value was '" + item.get<0>() + "' for field '" + item.get<1>().second->get_name() + "'";
                                                 throw txttable_parser_exception(msg);
                                                 }
                                             });
@@ -176,7 +170,7 @@ namespace core {
             LOG_DEBUG("'" << _rows.size() << "' rows read.");
             return 0;
             }
-
+        /*
         void txttable_parser::dump_headers(std::ostream& os, const std::string& sep) const {
             _t_field_descriptors::const_iterator it_last = --_field_descriptors.end();
             for (auto it = _field_descriptors.begin(); it!=_field_descriptors.end(); ++it) {
@@ -204,7 +198,7 @@ namespace core {
                 }
             os << "\n";
             }
-
+        */
 
         }
     }

@@ -51,7 +51,7 @@ if (NOT BIICODE)
         )
 	
     set_target_properties(txt_table PROPERTIES
-      PUBLIC_HEADER "api.h;txttable_parser.h;field.h;exceptions.h;field_subheader.h;field_vector.h;${CMAKE_CURRENT_BINARY_DIR}/config.h;${CMAKE_CURRENT_BINARY_DIR}/txt_table_export.h;"
+      PUBLIC_HEADER "api.h;txttable_parser.h;field.h;exceptions.h;field_subheader.h;field_vector.h;row.h;${CMAKE_CURRENT_BINARY_DIR}/config.h;${CMAKE_CURRENT_BINARY_DIR}/txt_table_export.h;"
       LINKER_LANGUAGE CXX
       FOLDER "core/service")
 

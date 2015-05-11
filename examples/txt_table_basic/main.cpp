@@ -23,23 +23,13 @@ int main() {
     parser.add_field<float>("petal width");
     parser.add_field<std::string>("class");
 
-    // Do parse
-    parser.parse_file("data/iris.data", ",", false);
+    parser.parse_file("data/iris/iris.data", ",", false);
+
     auto rows = parser.get_rows();
-    auto fields = parser.get_fields();
-    // Print some statistics
-    std::cout << "I have read " << rows.size() << " rows, for fields:" << std::endl;
-    for (auto it = fields.begin(); it!=fields.end(); ++it) {
-        auto field_rows = (*it).second.second->get_rows();
-        std::cout << "\t" << (*it).first << ": " << field_rows.size() << " rows";
-        if (it->first.compare("class") != 0) {
-            print_stats(field_rows);
-            std::cout << std::endl;
-            };
+    std::cout << "Read " << rows.size() << " rows." << std::endl;
+    for (auto i = 0; i<10; ++i) {
+        std::cout << rows[i] << std::endl;
         }
-    // Recreate original file
-    std::cout << "=========== DUMP ============" << std::endl;
-    parser.dump(std::cout, ",\t", true);
-    getchar();
+
     return 0;
     }
